@@ -1,17 +1,19 @@
 # buttons_pcf8591.py
 
-import smbus
+import busio
 
 class PCF8591:
-    def __init__(self, address=0x48, bus_number=3):
+    def __init__(self, address=0x48, bus_number=1):
         self.address = address
-        self.bus = smbus.SMBus(bus_number)
+        self.bus = busio.I2C(getattr(board, f"SCL_{bus_number}"), getattr(board, f"SDA_{bus_number}"))
 
     def read(self, channel):
         assert 0 <= channel <= 3, "Channel must be between 0 and 3 (inclusive)"
-        self.bus.write_byte(self.address, channel)
-        self.bus.read_byte(self.address)  # Discard the first byte (dummy read)
-        return self.bus.read_byte(self.address)
+        self.bus.writeto(self.address, bytes([channel]))
+        self.bus.readfrom_into(self.address, 1)  # Discard the first byte (dummy read)
+        result = bytearray(1)
+        self.bus.readfrom_into(self.address, result)
+        return result[0]
 
     def read_AIN0(self):
         return self.read(0)
