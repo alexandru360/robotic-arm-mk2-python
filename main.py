@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     time.sleep(1)
 
-    pcf8591 = PCF8591()
+    pcf8591 = PCF8591(bus_number=1)  # Use I2C bus 1
 
     ain0_value = pcf8591.read_AIN0()
     ain1_value = pcf8591.read_AIN1()
