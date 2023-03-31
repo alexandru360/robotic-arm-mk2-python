@@ -1,6 +1,7 @@
 # buttons_pcf8591.py
 
 import busio
+import board
 
 class PCF8591:
     def __init__(self, address=0x48, bus_number=1):
