@@ -1,8 +1,7 @@
 # servo_pca9685.py
 
 import time
-from board import SCL, SDA
-import busio
+import smbus
 from adafruit_pca9685 import PCA9685
 from adafruit_motor import servo
 
@@ -12,7 +11,7 @@ class MotorController:
         self.channel = channel
         
         # Initialize I2C bus with the specified bus_number
-        i2c_bus = busio.I2C(getattr(board, f"SCL_{bus_number}"), getattr(board, f"SDA_{bus_number}"))
+        i2c_bus = smbus.SMBus(bus_number)
         
         # Initialize PCA9685 module
         self.pca9685 = PCA9685(i2c_bus)
@@ -47,4 +46,3 @@ class MotorController:
     def stop(self):
         print(f"Stopping motor on channel {self.channel}")
         self.motor.angle = 90
-
