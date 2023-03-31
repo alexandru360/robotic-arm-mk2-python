@@ -7,11 +7,9 @@ from adafruit_pca9685 import PCA9685
 from adafruit_motor import servo
 
 class MotorController:
-      def __init__(self, address=0x40, bus_number=1):
-        self.bus = busio.I2C(SCL, SDA)
-        self.pca = PCA9685(self.bus, address=address)
-        self.pca.frequency = 50  # Set the frequency to 50 Hz
-        self.servos = [Servo(self.pca, channel) for channel in range(16)]
+    def __init__(self, speed, channel, bus_number=1):
+        self.speed = speed
+        self.channel = channel
         
         # Initialize I2C bus
         i2c_bus = busio.I2C(board.SCL, board.SDA)
