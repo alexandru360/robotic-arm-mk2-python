@@ -1,7 +1,8 @@
 # servo_pca9685.py
 
 import time
-import smbus
+import board
+import busio
 from adafruit_pca9685 import PCA9685
 from adafruit_motor import servo
 
@@ -10,8 +11,8 @@ class MotorController:
         self.speed = speed
         self.channel = channel
         
-        # Initialize I2C bus with the specified bus_number
-        i2c_bus = smbus.SMBus(bus_number)
+        # Initialize I2C bus
+        i2c_bus = busio.I2C(board.SCL, board.SDA)
         
         # Initialize PCA9685 module
         self.pca9685 = PCA9685(i2c_bus)
