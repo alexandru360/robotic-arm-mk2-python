@@ -9,7 +9,7 @@ if __name__ == "__main__":
     
     # motor.stop()
 
-    motor1 = MotorController(speed=100, channel=1, bus_number=1)  # Use I2C bus 1
+    motor1 = MotorController(speed=100, channel=0, bus_number=1)  # Use I2C bus 1
 
     motor1.moveUp(increment=1)
     time.sleep(1)
