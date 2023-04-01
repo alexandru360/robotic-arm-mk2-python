@@ -4,7 +4,7 @@ from board import SCL, SDA
 import busio
 
 class PCF8591:
-    def __init__(self, address=0x48, bus_number=1):
+    def __init__(self, address=0x48):
         self.address = address
         self.bus = busio.I2C(SCL, SDA)
 
@@ -22,5 +22,12 @@ class PCF8591:
     def read_AIN1(self):
         return self.read(1)
 
-    def read_AIN2(self):
-        return self.read(2)
+    # def read_AIN2(self):
+    #     return self.read(2)
+
+    # def read_AIN3(self):
+    #     return self.read(3)
+
+    def read_SW(self):
+        return self.read(3)
+
