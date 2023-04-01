@@ -1,5 +1,5 @@
-from servo_pca9685 import MotorController
 import time
+from src.servo_pca9685 import MotorController
 
 if __name__ == "__main__":
     # motor = MotorController(speed=100, channel=0, bus_number=1)  # Use I2C bus 1

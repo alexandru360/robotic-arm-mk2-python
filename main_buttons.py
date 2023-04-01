@@ -1,5 +1,5 @@
 import time
-from buttons_pcf8591 import PCF8591
+from src.buttons_pcf8591 import PCF8591
 
 if __name__ == "__main__":
     pcf8591 = PCF8591()
