@@ -29,11 +29,10 @@ class HYSRF05:
         while GPIO.input(self.echo_pin) == 1:
             end_time = time.time()
 
-        # Calculate distance in cm
+        # Calculate distance in mm
         duration = end_time - start_time
-        distance = duration * 34300 / 2
-
-        return distance
+        distance_mm = duration * 17150
+        return distance_mm
 
     def __del__(self):
         GPIO.cleanup()

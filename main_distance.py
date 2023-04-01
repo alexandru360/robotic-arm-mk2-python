@@ -1,4 +1,5 @@
 from src.hysrf05_distance import HYSRF05
+import time
 
 # Conectăm pinul VCC la pinul 5V al Raspberry Pi, 
 # pinul GND la pinul GND al Raspberry Pi, 
@@ -9,7 +10,8 @@ if __name__ == "__main__":
     try:
         while True:
             distance = hysrf05.measure_distance()
-            print(f"Distance: {distance:.2f} cm")
+            print(f"Distance: {distance:.2f}")
+            time.sleep(0.1)  # Wait for 100 milliseconds before measuring again
 
     except KeyboardInterrupt:
         del hysrf05
