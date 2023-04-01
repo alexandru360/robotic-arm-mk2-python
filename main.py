@@ -26,13 +26,15 @@ if __name__ == "__main__":
             xCoord = pcf8591.read_AIN0()
             yCoord = pcf8591.read_AIN1()
 
-            sw_state = pcf8591.read_SW()
-            if sw_state == 0:
-                print("Button pressed")
-            else:
-                print("Button not pressed")
+            print(f"X: {xCoord}, Y: {yCoord}")
 
-            print(f"X: {xCoord}, Y: {yCoord}, Sw-state: {sw_state}")
+            # sw_state = pcf8591.read_SW()
+            # if sw_state == 0:
+            #     print("Button pressed")
+            # else:
+            #     print("Button not pressed")
+
+            # print(f"X: {xCoord}, Y: {yCoord}, Sw-state: {sw_state}")
 
             # if btnRed == 1 :
             #     motor.setToOrigin()

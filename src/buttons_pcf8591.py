@@ -2,11 +2,16 @@
 
 from board import SCL, SDA
 import busio
+import board
 
 class PCF8591:
     def __init__(self, address=0x48):
         self.address = address
-        self.bus = busio.I2C(SCL, SDA)
+        # self.bus = busio.I2C(SCL, SDA) # thi si true if the i2c is on the default RPI i2c-1
+        
+        # this is true because of the config.txt line 
+        # dtoverlay=i2c-gpio,bus=3,i2c_gpio_sda=27,i2c_gpio_scl=22
+        self.bus = busio.I2C(board.SCL_1, board.SDA_1) 
 
     def read(self, channel):
         assert 0 <= channel <= 3, "Channel must be between 0 and 3 (inclusive)"
