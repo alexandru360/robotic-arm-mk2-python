@@ -24,19 +24,25 @@ if __name__ == "__main__":
                     _channel = 1
 
             if x in range(155, 160) and y in range(203, 206):  # up
+                print("Moving Up")
                 motor.moveUp()
 
             if x in range(253, 256) and y in range(203, 206):  # down
+                print("Moving Down")
                 motor.moveUp()
 
             # The only channel of left and right
             if x in range(163, 167) and y in range(253, 256):  # left
                 # Use I2C bus 1
+                print("Moving left")
+
                 motor = PCA9685Servo(speed=_speed, channel=0)
                 motor.moveUp()
 
             if x in range(163, 167) and y in range(0, 5):  # right
                 # Use I2C bus 1
+                print("Moving right")
+
                 motor = PCA9685Servo(speed=_speed, channel=0)
                 motor.moveDown()
 

@@ -12,6 +12,7 @@ _maxAngle = 180
 # objChannel = ChannelAngle(0, 0)
 # arrChannelsAngle = []
 
+
 class PCA9685Servo:
     def __init__(self, speed, channel):
         self.speed = speed
@@ -33,54 +34,47 @@ class PCA9685Servo:
     def setToOrigin(self):
         print(f"Motor on channel {self.channel} setting to it's origin")
         self.motor.angle = 0
-        time.sleep(0.1)
 
     def setToHalfAngle(self):
         print(f"Motor on channel {self.channel} setting to 90")
         self.motor.angle = _halfAngle
-        time.sleep(0.1)
 
     def setToMaxAngle(self):
         print(f"Motor on channel {self.channel} setting to 180")
         self.motor.angle = _maxAngle
-        time.sleep(0.1)
 
     def moveUp(self, increment=1):
         print(
             f"Motor on channel {self.channel} is moving up with angle increment {increment}")
         for angle in range(0, _maxAngle+1, increment):
             self.motor.angle = angle
-            time.sleep(0.1)
 
     def moveUpStep(self, increment=1):
-        print(f"Motor on channel {self.channel} is moving up with angle increment {increment}")
+        print(
+            f"Motor on channel {self.channel} is moving up with angle increment {increment}")
         for angle in range(0, _maxAngle+1, increment):
             self.motor.angle = angle
-            time.sleep(0.1)
 
     def moveDown(self, increment=1):
         print(
             f"Motor on channel {self.channel} is moving down with angle increment {increment}")
         for angle in range(_maxAngle, -1, -increment):
             self.motor.angle = angle
-            time.sleep(0.1)
 
     def moveDownStep(self, increment=1):
         print(
             f"Motor on channel {self.channel} is moving down with angle increment {increment}")
         for angle in range(_maxAngle, -1, -increment):
             self.motor.angle = angle
-            time.sleep(0.1)
 
     def sweep(self):
         print(
             f"Sweeping motor on channel {self.channel} through its full range of motion.")
         for angle in range(0, _maxAngle+1, 5):
             self.motor.angle = angle
-            time.sleep(0.1)
+
         for angle in range(_maxAngle, -1, -5):
             self.motor.angle = angle
-            time.sleep(0.1)
 
     def stop(self):
         print(f"Stopping motor on channel {self.channel}")
