@@ -1,6 +1,6 @@
 import time
 from src.buttons_pcf8591 import PCF8591
-from src.servo_pca9685 import MotorController
+from src.pca9685_servo import MotorController
 
 if __name__ == "__main__":
     _channel = 3
