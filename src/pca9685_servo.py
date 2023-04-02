@@ -12,7 +12,7 @@ _maxAngle = 180
 # objChannel = ChannelAngle(0, 0)
 # arrChannelsAngle = []
 
-class MotorController:
+class PCA9685Servo:
     def __init__(self, speed, channel):
         self.speed = speed
         self.channel = channel

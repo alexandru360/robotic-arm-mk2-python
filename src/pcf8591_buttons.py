@@ -22,12 +22,8 @@ class PCF8591:
     def read_AIN1(self):
         return self.read(1)
 
-    # def read_AIN2(self):
-    #     return self.read(2)
+    def read_AIN2(self):
+        return self.read(2)
 
-    # def read_AIN3(self):
-    #     return self.read(3)
-
-    def read_SW(self):
+    def read_AIN3(self):
         return self.read(3)
-
