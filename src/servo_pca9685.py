@@ -84,4 +84,4 @@ class MotorController:
 
     def stop(self):
         print(f"Stopping motor on channel {self.channel}")
-        self.motor.angle = 0
+        self.motor.angle = _maxAngle
