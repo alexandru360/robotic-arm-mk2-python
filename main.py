@@ -18,7 +18,7 @@ if __name__ == "__main__":
             sw = pcf8591.read_AIN3()
             swState = "pressed" if sw == 0 or sw == 1 else "not pressed"
 
-            if sw in range(0, 2):
+            if sw in range(0, 1):
                 _channel = _channel + 1
                 if _channel not in range(0, 3):
                     _channel = 1
