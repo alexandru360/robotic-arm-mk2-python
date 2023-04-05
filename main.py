@@ -16,38 +16,37 @@ if __name__ == "__main__":
             x = pcf8591.read_AIN0()
             y = pcf8591.read_AIN1()
             sw = pcf8591.read_AIN3()
-            swState = "pressed" if sw == 0 or sw == 1 else "not pressed"
 
-            if sw in range(0, 1):
+            swRange = range(0, 5)
+            swState = "pressed" if sw in swRange else "not pressed"
+
+            xyTotal = x+y
+
+            if sw in swRange:
                 _channel = _channel + 1
                 if _channel not in range(0, 3):
                     _channel = 1
 
-            if x in range(155, 160) and y in range(203, 206):  # up
+            if xyTotal in range(200, 230):  # up
                 print("Moving Up")
-                motor.moveUp()
+                motor.moveUpStep()
 
-            if x in range(253, 256) and y in range(203, 206):  # down
+            if xyTotal in range(450, 470):  # down
                 print("Moving Down")
-                motor.moveUp()
+                motor.moveDownStep()
 
-            # The only channel of left and right
-            if x in range(163, 167) and y in range(253, 256):  # left
-                # Use I2C bus 1
+            if xyTotal in range(400, 430):  # left
                 print("Moving left")
+                mtr = PCA9685Servo(speed=_speed, channel=0)
+                mtr.moveUpStep()
 
-                motor = PCA9685Servo(speed=_speed, channel=0)
-                motor.moveUp()
-
-            if x in range(163, 167) and y in range(0, 5):  # right
-                # Use I2C bus 1
+            if xyTotal in range(160, 180):  # right
                 print("Moving right")
-
-                motor = PCA9685Servo(speed=_speed, channel=0)
-                motor.moveDown()
+                mtr = PCA9685Servo(speed=_speed, channel=0)
+                mtr.moveDownStep()
 
             print(
-                f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel}")
+                f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel} xyTotal {xyTotal}")
 
             time.sleep(1)
 

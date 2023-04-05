@@ -1,13 +1,14 @@
 # servo_pca9685.py
 
-import time
 import board
 import busio
 from adafruit_pca9685 import PCA9685
 from adafruit_motor import servo
 
+_lowAngle = 0
 _halfAngle = 90.0
 _maxAngle = 180.0
+
 
 class PCA9685Servo:
     def __init__(self, speed, channel):
@@ -40,39 +41,51 @@ class PCA9685Servo:
         self.motor.angle = _maxAngle
 
     def moveUp(self, increment=1):
-        print(f"Motor on channel {self.channel} is moving up with angle increment {increment}")
-        for angle in range(0, int(_maxAngle) + 1, increment):
+        print(
+            f"Motor on channel {self.channel} is moving up with angle increment {increment}")
+        for angle in range(_lowAngle, float(_maxAngle) + 1, increment):
             self.motor.angle = float(angle)
-
-    def moveUpStep(self, increment=1):
-        print(f"Motor on channel {self.channel} is moving up with angle increment {increment}")
-        angle = self.motor.angle
-        for i in range(increment):
-            angle += 1
-            self.motor.angle = angle
 
     def moveDown(self, increment=1):
-        print(f"Motor on channel {self.channel} is moving down with angle increment {increment}")
-        for angle in range(int(_maxAngle), -1, -increment):
+        print(
+            f"Motor on channel {self.channel} is moving down with angle increment {increment}")
+        for angle in range(float(_maxAngle), -1, -increment):
             self.motor.angle = float(angle)
-
-    def moveDownStep(self, increment=1):
-        print(f"Motor on channel {self.channel} is moving down with angle increment {increment}")
-        angle = self.motor.angle
-        for i in range(increment):
-            angle -= 1
-            self.motor.angle = angle
 
     def sweep(self):
-        print(f"Sweeping motor on channel {self.channel} through its full range of motion.")
-        for angle in range(0, int(_maxAngle) + 1, 5):
+        print(
+            f"Sweeping motor on channel {self.channel} through its full range of motion.")
+        for angle in range(_lowAngle, float(_maxAngle) + 1, 5):
             self.motor.angle = float(angle)
-        for angle in range(int(_maxAngle), -1, -5):
+        for angle in range(float(_maxAngle), -1, -5):
             self.motor.angle = float(angle)
 
     def stopAndReset(self):
-        print(f"Stopping motor on channel {self.channel} and resetting to origin")
-        self.motor.angle = 0
+        print(
+            f"Stopping motor on channel {self.channel} and resetting to origin")
+        self.motor.angle = _lowAngle
 
     def stop(self):
         self.motor.angle = _maxAngle
+
+    def moveUpStep(self, increment=1):
+        angle = float(self.motor.angle)
+        print(f"Current angle {angle}, increment received {increment}")
+        if angle >= _lowAngle and angle <= _maxAngle:
+            angle += increment
+            self.motor.angle = angle
+        else:
+            self.setToOrigin()
+
+        print(f"New current angle {angle}")
+
+    def moveDownStep(self, increment=1):
+        angle = float(self.motor.angle)
+        print(f"Current angle {angle}, increment received {increment}")
+        if angle >= _lowAngle and angle <= _maxAngle:
+            angle -= increment
+            self.motor.angle = angle
+        else:
+            self.setToOrigin()
+
+        print(f"New current angle {angle}")
