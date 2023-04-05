@@ -1,4 +1,3 @@
-import time
 from src.pcf8591_buttons import PCF8591
 from src.pca9685_servo import PCA9685Servo
 
@@ -6,9 +5,6 @@ if __name__ == "__main__":
     try:
         _channel = 1
         _speed = 50
-
-        # Use I2C bus 1
-        motor = PCA9685Servo(speed=_speed, channel=_channel)
 
         pcf8591 = PCF8591()
 
@@ -29,10 +25,12 @@ if __name__ == "__main__":
 
             if xyTotal in range(200, 230):  # up
                 print("Moving Up")
+                motor = PCA9685Servo(speed=_speed, channel=_channel)
                 motor.moveUpStep()
 
             if xyTotal in range(450, 470):  # down
                 print("Moving Down")
+                motor = PCA9685Servo(speed=_speed, channel=_channel)
                 motor.moveDownStep()
 
             if xyTotal in range(400, 430):  # left
@@ -47,8 +45,6 @@ if __name__ == "__main__":
 
             print(
                 f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel} xyTotal {xyTotal}")
-
-            time.sleep(1)
 
     except KeyboardInterrupt:
         motor.stop()
