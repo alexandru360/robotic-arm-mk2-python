@@ -8,6 +8,9 @@ if __name__ == "__main__":
 
         pcf8591 = PCF8591()
 
+        motor = PCA9685Servo(speed=_speed, channel=_channel)
+        base = PCA9685Servo(speed=_speed, channel=0)
+
         while True:
             x = pcf8591.read_AIN0()
             y = pcf8591.read_AIN1()
@@ -25,23 +28,19 @@ if __name__ == "__main__":
 
             if xyTotal in range(200, 230):  # up
                 print("Moving Up")
-                motor = PCA9685Servo(speed=_speed, channel=_channel)
                 motor.moveUpStep()
 
             if xyTotal in range(450, 470):  # down
                 print("Moving Down")
-                motor = PCA9685Servo(speed=_speed, channel=_channel)
                 motor.moveDownStep()
 
             if xyTotal in range(400, 430):  # left
                 print("Moving left")
-                mtr = PCA9685Servo(speed=_speed, channel=0)
-                mtr.moveUpStep()
+                base.moveUpStep()
 
             if xyTotal in range(160, 180):  # right
                 print("Moving right")
-                mtr = PCA9685Servo(speed=_speed, channel=0)
-                mtr.moveDownStep()
+                base.moveDownStep()
 
             print(
                 f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel} xyTotal {xyTotal}")
