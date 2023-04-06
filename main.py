@@ -1,5 +1,6 @@
-from src.pcf8591_buttons import PCF8591
-from src.pca9685_servo import PCA9685Servo
+import time
+from pcf8591_buttons import PCF8591
+from pca9685_servo import PCA9685Servo
 
 if __name__ == "__main__":
     try:
@@ -42,8 +43,8 @@ if __name__ == "__main__":
                 print("Moving right")
                 base.moveDownStep()
 
-            print(
-                f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel} xyTotal {xyTotal}")
+            print(f"X: {x}, Y: {y}, Sw-state: {sw}-{swState}, Selected channel {_channel} xyTotal {xyTotal}")
+            time.sleep(0.2)
 
     except KeyboardInterrupt:
         motor.stop()
