@@ -127,5 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/.idea/deployment.xml
+/src/hysrf05_distance.py
+/main_distance.py
+/main_motor.py
+/src/pca9685_servo.py
+/src/pcf8591_buttons.py
+/zero_servo.py
 .vscode/*
 .idea/*
